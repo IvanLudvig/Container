@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1580900406 source:/home-local/student/workspace/P1/main.cpp
+	<iostream>
+	<list.h>
+
+1580900581 /home-local/student/workspace/P1/include/list.h
+	<iostream>
+	<node.h>
+
+1580900645 source:/home-local/student/workspace/P1/src/list.cpp
+	"list.h"
+
+1580900542 /home-local/student/workspace/P1/include/node.h
+	<iostream>
+
+1580900428 source:/home-local/student/workspace/P1/src/node.cpp
+	"node.h"
+
