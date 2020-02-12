@@ -9,12 +9,13 @@ class node
         virtual ~node();
         void push(int data);
         void append(int data);
+        bool exists(int data);
         node* getNext();
         int getData();
         node* findElement(int data);
+        node* next;
 
     private:
-        node* next;
         int data;
 };
 

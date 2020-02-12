@@ -12,6 +12,17 @@ int list::getLength()
     return length;
 }
 
+bool list::exists(int value)
+{
+    if(length==0)
+    {
+        return false;
+    }else
+    {
+        return root->exists(value);
+    }
+}
+
 node* list::findNode(int data)
 {
     if(length==0)
@@ -34,14 +45,14 @@ node* list::getByIndex(int index)
         int i = 0;
         while(i<index)
         {
-            current = current->getNext();
+            current = current->next;
             i++;
         }
         return current;
     }
 }
 
-void list::add(int data)
+void list::insert(int data)
 {
     if(length==0)
     {
@@ -51,6 +62,20 @@ void list::add(int data)
         root->append(data);
     }
     length++;
+}
+
+void list::remove(int value)
+{
+    if(length==0)
+    {
+        return;
+    }
+    node* element = root;
+    while(element->next->getData()!=value)
+    {
+        element = element->next;
+    }
+    element->next = element->next->next;
 }
 
 void list::addToFront(int data)
@@ -76,7 +101,7 @@ void list::insertAt(int data, int index)
         int i = 0;
         while(i<index)
         {
-            current = current->getNext();
+            current = current->next;
             i++;
         }
         current->push(data);
@@ -84,15 +109,29 @@ void list::insertAt(int data, int index)
     }
 }
 
+void list::removeAt(int index)
+{
+    node* element = root;
+    if(index == 0)
+    {
+        root = element->next;
+    }
+    for(int i = 0; i < index-1; i++)
+    {
+        element = element->next;
+    }
+    element->next = element->next->next;
+}
+
 void list::print()
 {
     node* current = root;
-    while(current->getNext()!=NULL)
+    while(current->next!=NULL)
     {
         cout<<current->getData()<<endl;
-        current = current->getNext();
+        current = current->next;
     }
-    cout << current->getData() << endl;
+    cout<<current->getData()<<endl;
 }
 
 list::~list()

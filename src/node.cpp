@@ -35,6 +35,20 @@ node* node::findElement(int data)
     return current;
 }
 
+bool node::exists(int data)
+{
+    node* current = this;
+    while(current->next!=NULL)
+    {
+        if(current->data==data)
+        {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
 node* node::getNext()
 {
     return this->next;
