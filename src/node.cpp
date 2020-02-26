@@ -1,4 +1,4 @@
-#include "node.h"
+#include "../include/node.h"
 
 node::node(int data)
 {
@@ -59,7 +59,7 @@ int node::getData()
     return data;
 }
 
-node::~node()
-{
-    delete next;
+node::~node(){
+
 }
+

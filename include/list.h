@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 #include <iostream>
-#include "node.h"
+#include "../src/node.cpp"
 #include "Container.h"
 
 class list : public Container
@@ -18,7 +18,7 @@ class list : public Container
         int getLength();
         node* findNode(int value);
         node* getByIndex(int index);
-        ~list();
+        virtual ~list();
 
     private:
         int length;

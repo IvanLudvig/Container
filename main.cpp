@@ -1,22 +1,28 @@
 #include <iostream>
-#include <list.h>
+#include "src/list.cpp"
 
 using namespace std;
 
 int main()
 {
-    list* mylist = new list();
-    for(int i = 0; i<10; i++)
-    {
-        mylist->add(i);
-    }
-    mylist->addToFront(-1);
-    mylist->print();
-    cout<<endl;
-    cout<<mylist->getByIndex(4)->getData()<<endl<<endl;
-    mylist->insertAt(12, 4);
-    mylist->print();
+    Container* c = new list();
 
-    delete mylist;
+    for(int i = 1; i < 10; i++)
+        c->insert(i*i);
+
+    cout << "Container after creation:" << endl;
+    c->print();
+
+    if(c->exists(25))
+        cout << "Search for value 25: found" << endl;
+
+    if(!c->exists(111))
+        cout << "Search for value 111: not found" << endl;
+
+    c->remove(25);
+    cout << "Container after deletion of the element:" << endl;
+    c->print();
+
+    delete c;
     return 0;
 }

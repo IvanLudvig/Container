@@ -1,4 +1,4 @@
-#include "list.h"
+#include "../include/list.h"
 
 using namespace std;
 
@@ -64,20 +64,6 @@ void list::insert(int data)
     length++;
 }
 
-void list::remove(int value)
-{
-    if(length==0)
-    {
-        return;
-    }
-    node* element = root;
-    while(element->next->getData()!=value)
-    {
-        element = element->next;
-    }
-    element->next = element->next->next;
-}
-
 void list::addToFront(int data)
 {
     if(length==0)
@@ -109,6 +95,22 @@ void list::insertAt(int data, int index)
     }
 }
 
+void list::remove(int value)
+{
+    if(length==0)
+    {
+        return;
+    }
+    node* element = root;
+    while(element->next->getData()!=value)
+    {
+        element = element->next;
+    }
+    node* temp = element->next->next;
+    delete element->next;
+    element->next = temp;
+}
+
 void list::removeAt(int index)
 {
     node* element = root;
@@ -120,7 +122,9 @@ void list::removeAt(int index)
     {
         element = element->next;
     }
-    element->next = element->next->next;
+    node* temp = element->next->next;
+    delete element->next;
+    element->next = temp;
 }
 
 void list::print()
@@ -136,5 +140,12 @@ void list::print()
 
 list::~list()
 {
-    delete root;
+    node* current = root;
+    while(current!=NULL)
+    {
+        node* temp = current->next;
+        delete current;
+        current = temp;
+    }
+    delete current;
 }
