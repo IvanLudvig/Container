@@ -1,103 +1,46 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include <iostream>
-#include "node.h"
 #include "Container.h"
-#include <iterator>
+#include "list_iterator.h"
+#include <algorithm>
 
 template<typename T>
 class list : public Container<T>
 {
-private:
-    unsigned int length = 0;
-    node<T> *root;
+ private:
+	unsigned int length = 0;
+	node<T>* root;
 
-public:
-    list();
+ public:
+	typedef list_iterator<node<T>> iterator;
+	typedef list_iterator<const node<T>> const_iterator;
 
-    list(const list<T> &l);
+	list();
 
-    void insert(const T &value);
+	list(const list<T>& l);
 
-    bool exists(const T &value) const;
+	void insert(const T& value) override;
 
-    void remove(const T &value);
+	bool exists(const T& value) const override;
 
-    void print();
+	void remove(const T& value) override;
 
-    int getLength();
+	void print() const;
 
-    void operator=(const list<T> &l);
+	int getLength();
 
-    ~list();
+	list<T>& operator=(const list<T>& l);
 
-    class iterator
-    {
-        friend class list<T>;
+	~list();
 
-    private:
-        node<T> *nodePtr;
+	iterator begin();
+	iterator end();
+	const_iterator begin() const;
+	const_iterator end() const;
+	const_iterator cbegin() const;
+	const_iterator cend() const;
 
-    public:
-        iterator() : nodePtr(NULL)
-        {}
-
-        iterator(node<T> *newPtr) : nodePtr(newPtr)
-        {}
-
-        iterator operator=(node<T> *pNode)
-        {
-            this->nodePtr = pNode;
-            return *this;
-        }
-
-        bool operator!=(const iterator &itr) const
-        {
-            return nodePtr != itr.nodePtr;
-        }
-
-        T operator*() const
-        {
-            if (nodePtr == NULL)
-            {
-                return 0;
-            }
-            return nodePtr->getValue();
-        }
-
-        iterator &operator++()
-        {
-            if (nodePtr == NULL)
-            {
-                return *this;
-            }
-            nodePtr = nodePtr->next;
-            return *this;
-        }
-
-        iterator operator++(int)
-        {
-            if (nodePtr == NULL)
-            {
-                return *this;
-            }
-            iterator temp = *this;
-            nodePtr = nodePtr->next;
-            return temp;
-        }
-    };
-
-    iterator begin() const
-    {
-        iterator it = iterator(root);
-        return it;
-    }
-
-    iterator end() const
-    {
-        return iterator(NULL);
-    }
 };
 
 template

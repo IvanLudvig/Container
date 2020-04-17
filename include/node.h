@@ -10,6 +10,8 @@ class node
 private:
     T value;
 public:
+    typedef T value_type;
+
     node<T>(const T& data=0);
 
     void append(const T &data);

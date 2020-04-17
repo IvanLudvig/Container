@@ -1,5 +1,4 @@
 #include <vector>
-#include <algorithm>
 #include <functional>
 #include <stdexcept>
 
@@ -310,7 +309,9 @@ bool test13()
 
     from_impl.clear();
     for(const auto& el: impl3)
+    {
         from_impl.push_back(el);
+    }
     sort(from_impl.begin(), from_impl.end());
     test_ok = test_ok && (from_impl == reference);
 
@@ -327,8 +328,7 @@ bool test14()
         impl.insert(i);
     }
 
-    //int mycount = count_if(impl.begin(), impl.end(), [size](int i) { return i < size; });
-    int mycount = 0;
+    int mycount = count_if(impl.begin(), impl.end(), [size](int i) { return i < size; });
     bool test_ok = (mycount == size);
     cout << boolalpha << "STL algo can be applied: " << test_ok << endl;
     return test_ok;
