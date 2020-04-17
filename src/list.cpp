@@ -11,11 +11,10 @@ list<T>::list()
 template<typename T>
 list<T>::list(const list<T>& l)
 {
-	//delete root;
 	node<T>* current = l.root;
 	length = 0;
 	root = NULL;
-	while (current != NULL)
+	while (current)
 	{
 		insert(current->getValue());
 		current = current->next;
@@ -91,7 +90,7 @@ void list<T>::print() const
 		return;
 	}
 	node<T>* current = root;
-	while (current->next != NULL)
+	while (current->next)
 	{
 		cout << current->getValue() << endl;
 		current = current->next;
@@ -120,13 +119,12 @@ list<T>::~list()
 	if (length != 0)
 	{
 		node<T>* current = root;
-		while (current != NULL)
+		while (current)
 		{
 			node<T>* temp = current->next;
 			delete current;
 			current = temp;
 		}
-		//delete current;
 	}
 }
 

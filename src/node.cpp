@@ -12,7 +12,7 @@ void node<T>::append(const T& value)
 {
 	node<T>* element = new node<T>(value);
 	node<T>* current = this;
-	while (current->next != NULL)
+	while (current->next)
 	{
 		current = current->next;
 	}
@@ -23,7 +23,7 @@ template<typename T>
 bool node<T>::exists(const T& value)
 {
 	node<T>* current = this;
-	while (current != NULL)
+	while (current)
 	{
 		if (current->value == value)
 		{

@@ -33,34 +33,35 @@ list_iterator<NodeT> list_iterator<NodeT>::operator+(int i)
 template<typename NodeT>
 typename list_iterator<NodeT>::value_type list_iterator<NodeT>::operator*() const
 {
-	if (node == NULL)
+	if (node)
 	{
-		return 0;
+		return node->getValue();;
 	}
-	return node->getValue();
+	return 0;
 }
 
 template<typename NodeT>
 list_iterator<NodeT> list_iterator<NodeT>::operator++()
 {
-	if (node == NULL)
+	if (node)
 	{
-		return *this;
+		node = node->next;
 	}
-	node = node->next;
 	return *this;
 }
 
 template<typename NodeT>
 list_iterator<NodeT> list_iterator<NodeT>::operator++(int)
 {
-	if (node == NULL)
+	if (node)
 	{
-		return *this;
+		list_iterator temp = *this;
+		node = node->next;
+		return temp;
+
 	}
-	list_iterator temp = *this;
-	node = node->next;
-	return temp;
+	return *this;
+
 }
 
 
