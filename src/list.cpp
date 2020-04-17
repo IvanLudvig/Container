@@ -3,10 +3,7 @@
 using namespace std;
 
 template<typename T>
-list<T>::list()
-{
-	root = NULL;
-}
+list<T>::list() :root(NULL) {}
 
 template<typename T>
 list<T>::list(const list<T>& l)

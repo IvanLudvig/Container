@@ -22,17 +22,9 @@ class list_iterator
 	using const_pointer = const value_type*;
 	typedef std::forward_iterator_tag iterator_category;
 
-	list_iterator()
-		: node(NULL)
-	{
-	}
+	list_iterator(NodeT* node = NULL) : node(node) {};
 
-	list_iterator(NodeT* newPtr)
-		: node(newPtr)
-	{
-	}
-
-	list_iterator operator=(NodeT* pNode);
+	list_iterator operator=(NodeT* node);
 
 	bool operator==(const list_iterator& itr) const;
 

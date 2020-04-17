@@ -1,11 +1,7 @@
 #include "node.h"
 
 template<typename T>
-node<T>::node(const T& value)
-{
-	this->value = value;
-	next = NULL;
-}
+node<T>::node(const T& value) : value(value), next(NULL) {}
 
 template<typename T>
 void node<T>::append(const T& value)

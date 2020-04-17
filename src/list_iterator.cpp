@@ -1,9 +1,9 @@
 #include "list_iterator.h"
 
 template<typename NodeT>
-list_iterator<NodeT> list_iterator<NodeT>::operator=(NodeT* pNode)
+list_iterator<NodeT> list_iterator<NodeT>::operator=(NodeT* node)
 {
-	this->node = pNode;
+	this->node = node;
 	return *this;
 }
 
