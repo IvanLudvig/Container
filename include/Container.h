@@ -2,19 +2,29 @@
 #define CONTAINER_H
 
 
+template<typename T>
 class Container
 {
 public:
-    // Виртуальные методы, должны быть реализованы вашим контейнером
-    virtual void insert(int value) = 0;
-    virtual bool exists(int value) = 0;
-    virtual void remove(int value) = 0;
+    // Виртуальный деструктор
+    ~Container()
+    {};
 
-    // И этот тоже, хотя к нему потом ещё вернёмся
+    /*
+     * Виртуальные методы, должны быть реализованы вашим контейнером
+     */
+
+    // Вставка элемента
+    virtual void insert(const T &value) = 0;
+
+    // Удаление элемента
+    virtual void remove(const T &value) = 0;
+
+    // Проверка наличия элемента
+    virtual bool exists(const T &value) const = 0;
+
     virtual void print() = 0;
 
-    // Виртуальный деструктор (пока просто поверьте, что он нужен)
-    virtual ~Container() { };
 };
 
 #endif // CONTAINER_H

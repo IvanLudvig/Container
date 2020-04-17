@@ -1,46 +1,31 @@
-#include "../include/node.h"
+#include "node.h"
 
-node::node(int data)
+template<typename T>
+node<T>::node(const T &value)
 {
-    this->data = data;
+    this->value = value;
     next = NULL;
 }
 
-void node::push(int data)
+template<typename T>
+void node<T>::append(const T &value)
 {
-    node* element = new node(this->data);
-    element->next = this->next;
-    this->next = element;
-    this->data = data;
-}
-
-void node::append(int data)
-{
-    node* element = new node(data);
-    node* current = this;
-    while(current->next!=NULL)
+    node<T> *element = new node<T>(value);
+    node<T> *current = this;
+    while (current->next != NULL)
     {
         current = current->next;
     }
     current->next = element;
 }
 
-node* node::findElement(int data)
+template<typename T>
+bool node<T>::exists(const T &value)
 {
-    node* current = this;
-    while(current->getData()!=data)
+    node<T> *current = this;
+    while (current != NULL)
     {
-        current = current->getNext();
-    }
-    return current;
-}
-
-bool node::exists(int data)
-{
-    node* current = this;
-    while(current->next!=NULL)
-    {
-        if(current->data==data)
+        if (current->value == value)
         {
             return true;
         }
@@ -49,17 +34,21 @@ bool node::exists(int data)
     return false;
 }
 
-node* node::getNext()
+template<typename T>
+node<T> *node<T>::getNext() const
 {
     return this->next;
 }
 
-int node::getData()
+template<typename T>
+T node<T>::getValue() const
 {
-    return data;
+    return value;
 }
 
-node::~node(){
+template<typename T>
+node<T>::~node()
+{
 
 }
 

@@ -1,18 +1,38 @@
-#include "../include/list.h"
+#include "list.h"
 
 using namespace std;
 
-list::list()
+template<typename T>
+list<T>::list()
 {
-    length = 0;
+
 }
 
-int list::getLength()
+template<typename T>
+list<T>::list(const list<T> &l)
 {
-    return length;
+    if(root==NULL)
+    {
+        *root = *l.root;
+        length = l.length;
+    }
 }
 
-bool list::exists(int value)
+template<typename T>
+void list<T>::insert(const T &value)
+{
+    if(length==0)
+    {
+        root = new node<T>(value);
+    }else
+    {
+        root->append(value);
+    }
+    length++;
+}
+
+template<typename T>
+bool list<T>::exists(const T &value) const
 {
     if(length==0)
     {
@@ -23,127 +43,77 @@ bool list::exists(int value)
     }
 }
 
-node* list::findNode(int data)
+template<typename T>
+void list<T>::remove(const T &value)
 {
-    if(length==0)
+    if(exists(value))
     {
-        return NULL;
-    }else
-    {
-        return root->findElement(data);
-    }
-}
-
-node* list::getByIndex(int index)
-{
-    if((index<0)||(index>=length))
-    {
-        return NULL;
-    }else
-    {
-        node* current = root;
-        int i = 0;
-        while(i<index)
+        if (length == 0)
         {
-            current = current->next;
-            i++;
+            return;
         }
-        return current;
-    }
-}
-
-void list::insert(int data)
-{
-    if(length==0)
-    {
-        root = new node(data);
-    }else
-    {
-        root->append(data);
-    }
-    length++;
-}
-
-void list::addToFront(int data)
-{
-    if(length==0)
-    {
-        root = new node(data);
-    }else
-    {
-        root->push(data);
-    }
-    length++;
-}
-
-void list::insertAt(int data, int index)
-{
-    if((index<0)||(index>length))
-    {
-        cout<<"error"<<endl;
-    }else
-    {
-        node* current = root;
-        int i = 0;
-        while(i<index)
+        node<T> *element = root;
+        if(root->getValue()==value){
+            node<T> *temp = root->next;
+            delete root;
+            root = temp;
+            length--;
+            return;
+        }
+        for (unsigned int i = 0; i < length - 1; i++)
         {
-            current = current->next;
-            i++;
+            std::cout << i << std::endl;
+            if (element->next->getValue() != value)
+            {
+                element = element->next;
+                continue;
+            }
+            node<T> *temp = element->next->next;
+            delete element->next;
+            element->next = temp;
+            length--;
+            return;
         }
-        current->push(data);
-        length++;
     }
 }
 
-void list::remove(int value)
+template<typename T>
+void list<T>::print()
 {
     if(length==0)
     {
         return;
     }
-    node* element = root;
-    while(element->next->getData()!=value)
-    {
-        element = element->next;
-    }
-    node* temp = element->next->next;
-    delete element->next;
-    element->next = temp;
-}
-
-void list::removeAt(int index)
-{
-    node* element = root;
-    if(index == 0)
-    {
-        root = element->next;
-    }
-    for(int i = 0; i < index-1; i++)
-    {
-        element = element->next;
-    }
-    node* temp = element->next->next;
-    delete element->next;
-    element->next = temp;
-}
-
-void list::print()
-{
-    node* current = root;
+    node<T>* current = root;
     while(current->next!=NULL)
     {
-        cout<<current->getData()<<endl;
+        cout<<current->getValue()<<endl;
         current = current->next;
     }
-    cout<<current->getData()<<endl;
+    cout<<current->getValue()<<endl;
 }
 
-list::~list()
+template<typename T>
+int list<T>::getLength()
 {
-    node* current = root;
+    return length;
+}
+
+template<typename T>
+void list<T>::operator=(const list<T> &l)
+{
+    //delete root;
+    root = l.root;
+    length = l.length;
+}
+
+template<typename T>
+list<T>::~list()
+{
+    node<T>* current = root;
     while(current!=NULL)
     {
-        node* temp = current->next;
+        node<T>* temp = current->next;
         delete current;
         current = temp;
     }

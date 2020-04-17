@@ -1,22 +1,32 @@
 #ifndef NODE_H
 #define NODE_H
-#include <iostream>
 
+#include <iostream>
+#include <string>
+
+template<typename T>
 class node
 {
-    public:
-        node(int data);
-        virtual ~node();
-        void push(int data);
-        void append(int data);
-        bool exists(int data);
-        node* getNext();
-        int getData();
-        node* findElement(int data);
-        node* next;
+private:
+    T value;
+public:
+    node<T>(const T& data=0);
 
-    private:
-        int data;
+    void append(const T &data);
+
+    bool exists(const T& data);
+
+    node<T> *getNext() const;
+
+    T getValue() const;
+
+    node<T> *next;
+
+    ~node();
 };
+
+template class node<int>;
+template class node<char>;
+template class node<std::string>;
 
 #endif // NODE_H
