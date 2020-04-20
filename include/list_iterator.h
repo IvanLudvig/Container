@@ -22,7 +22,7 @@ class list_iterator
 	using const_pointer = const value_type*;
 	typedef std::forward_iterator_tag iterator_category;
 
-	list_iterator(NodeT* node = NULL) : node(node) {};
+	list_iterator(NodeT* node = NULL);
 
 	list_iterator operator=(NodeT* node);
 
@@ -40,13 +40,9 @@ class list_iterator
 
 };
 
-template
-class list_iterator<node<int>>;
-
-template
-class list_iterator<node<char>>;
-
-template
-class list_iterator<node<std::string>>;
+template class list_iterator<node<int>>;
+template class list_iterator<node<std::string>>;
+template class list_iterator<const node<int>>;
+template class list_iterator<const node<std::string>>;
 
 #endif //CONTAINER_LIST_ITERATOR_H

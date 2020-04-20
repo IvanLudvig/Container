@@ -40,16 +40,10 @@ class list : public Container<T>
 	const_iterator end() const;
 	const_iterator cbegin() const;
 	const_iterator cend() const;
-
+	
 };
 
-template
-class list<int>;
-
-template
-class list<char>;
-
-template
-class list<std::string>;
+template class list<int>;
+template class list<std::string>;
 
 #endif // LIST_H

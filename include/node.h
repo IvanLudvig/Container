@@ -7,28 +7,27 @@
 template<typename T>
 class node
 {
-private:
-    T value;
-public:
-    typedef T value_type;
+ private:
+	T value;
+ public:
+	typedef T value_type;
 
-    node<T>(const T& data=0);
+	node<T>(const T& data = 0);
 
-    void append(const T &data);
+	void append(const T& data);
 
-    bool exists(const T& data);
+	bool exists(const T& data);
 
-    node<T> *getNext() const;
+	node<T>* getNext() const;
 
-    T getValue() const;
+	T getValue() const;
 
-    node<T> *next;
+	node<T>* next;
 
-    ~node();
+	~node();
 };
 
 template class node<int>;
-template class node<char>;
 template class node<std::string>;
 
 #endif // NODE_H
